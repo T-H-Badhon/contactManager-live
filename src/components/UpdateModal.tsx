@@ -49,8 +49,6 @@ const UpdateModal = ({ contact }: { contact: TContact }) => {
     const address = target.address.value;
     const photoUrl = target.photoUrl.value;
 
-    console.log(photoUrl);
-
     const textData: TUpdateContact = {};
     if (name) {
       textData.name = name;
