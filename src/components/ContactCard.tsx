@@ -1,7 +1,7 @@
 import { TContact } from "../types/dataTypes";
 import { Card } from "flowbite-react";
 import UpdateModal from "./UpdateModal";
-import { Menu, MenuButton, MenuItem } from "@szhsin/react-menu";
+import { Menu, MenuItem } from "@szhsin/react-menu";
 import {
   useChangeFavouriteStatusMutation,
   useDeleteContactMutation,
