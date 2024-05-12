@@ -6,11 +6,14 @@ import FailedToast from "../components/toasts/FailedToast";
 import { TError } from "../types/dataTypes";
 import SuccessToast from "../components/toasts/SuccessToast";
 import { BounceLoader } from "react-spinners";
+import { addContactSchema } from "../validationSchema/schemas";
+import ErrorToast from "../components/toasts/ErrorToast";
 
 const AddContact = () => {
   const [File, setFile] = useState<File | null>(null);
   const [imageSrc, setImageSrc] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
+  const [validateError, setValidateError] = useState("");
 
   const formData = new FormData();
 
@@ -28,6 +31,13 @@ const AddContact = () => {
         }
       };
       reader.readAsDataURL(file);
+    }
+  };
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const handlePhotoUrl = (e: React.FocusEvent<HTMLInputElement>) => {
+    if (e.currentTarget?.value) {
+      setImageSrc(e.currentTarget.value);
     }
   };
 
@@ -56,9 +66,12 @@ const AddContact = () => {
       photoUrl,
     };
 
-    if (!File && !photoUrl) {
-      alert("photo is requied");
-      return;
+    if (!File) {
+      const result = addContactSchema.safeParse(textData);
+      if (result?.error) {
+        setValidateError(result.error?.issues[0].message);
+        return;
+      }
     }
 
     formData.append("file", File as File);
@@ -89,6 +102,9 @@ const AddContact = () => {
         {error ? (
           <FailedToast error={error as TError} key={2}></FailedToast>
         ) : null}
+        {validateError ? (
+          <ErrorToast message={validateError}></ErrorToast>
+        ) : null}
 
         <h1 className="text-xl md:text-2xl lg:text-3xl text-center font-bold">
           Add Contact
@@ -117,7 +133,7 @@ const AddContact = () => {
                   />
                   <h1 className="text-red-600 text-xl">*</h1>
                 </div>
-                <TextInput type="text" id="photoUrl" />
+                <TextInput onBlur={handlePhotoUrl} type="text" id="photoUrl" />
               </div>
             </div>
             <div className="col-span-4">

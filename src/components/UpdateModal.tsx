@@ -17,6 +17,12 @@ const UpdateModal = ({ contact }: { contact: TContact }) => {
 
   const [UpdateContact, { data, error }] = useUpdateContactMutation();
 
+  const handlePhotoUrl = (e: React.FocusEvent<HTMLInputElement>) => {
+    if (e.currentTarget?.value) {
+      setImageSrc(e.currentTarget.value);
+    }
+  };
+
   const imageshower = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
     if (files && files.length > 0) {
@@ -132,7 +138,11 @@ const UpdateModal = ({ contact }: { contact: TContact }) => {
                         />
                         <h1 className="text-red-600 text-xl">*</h1>
                       </div>
-                      <TextInput type="text" id="photoUrl" />
+                      <TextInput
+                        onBlur={handlePhotoUrl}
+                        type="text"
+                        id="photoUrl"
+                      />
                     </div>
                   </div>
                 </div>

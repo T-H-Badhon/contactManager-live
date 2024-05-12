@@ -41,37 +41,41 @@ const ContactCard = ({ contact }: { contact: TContact }) => {
           </div>
           <div>
             <Menu
-              className="space-y-2 min-w-28 "
-              menuButton={<h1 className="p-1 bg-sky-400 rounded-lg">Menu</h1>}
+              className=" rounded-lg min-w-28 "
+              menuButton={
+                <label className="p-1 bg-sky-400 rounded-lg">Menu</label>
+              }
             >
-              <MenuItem>
-                <button className="bg-sky-200 w-full rounded-lg my-1 p-2">
-                  <UpdateModal
-                    contact={contact}
-                    key={contact?._id}
-                  ></UpdateModal>
-                </button>
-              </MenuItem>
-              <MenuItem>
-                <button
-                  className="bg-sky-200 w-full rounded-lg my-0 p-1"
-                  onClick={chageStatus}
-                >
-                  <span className="text-xs">
-                    {contact?.isFavourite
-                      ? "Mark Unfavourite"
-                      : "Mark as Favourite"}
-                  </span>
-                </button>
-              </MenuItem>
-              <MenuItem>
-                <button
-                  className="bg-sky-200 w-full rounded-lg my-1 p-2"
-                  onClick={deleteContact}
-                >
-                  Delete
-                </button>
-              </MenuItem>
+              <div className="rounded-lg">
+                <MenuItem>
+                  <button className="bg-sky-200 w-full rounded-t-lg  p-2">
+                    <UpdateModal
+                      contact={contact}
+                      key={contact?._id}
+                    ></UpdateModal>
+                  </button>
+                </MenuItem>
+                <MenuItem>
+                  <button
+                    className="bg-sky-200 w-full my-1  p-1"
+                    onClick={chageStatus}
+                  >
+                    <span className="text-xs">
+                      {contact?.isFavourite
+                        ? "Mark Unfavourite"
+                        : "Mark as Favourite"}
+                    </span>
+                  </button>
+                </MenuItem>
+                <MenuItem>
+                  <button
+                    className="bg-sky-200 w-full rounded-b-lg  p-2"
+                    onClick={deleteContact}
+                  >
+                    Delete
+                  </button>
+                </MenuItem>
+              </div>
             </Menu>
           </div>
         </div>
