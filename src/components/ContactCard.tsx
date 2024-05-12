@@ -30,7 +30,7 @@ const ContactCard = ({ contact }: { contact: TContact }) => {
 
   return (
     <>
-      <Card className="max-w-sm mx-auto">
+      <Card className="max-w-sm">
         <div className="flex justify-between px-4 pt-4">
           <div>
             {contact?.isFavourite ? (
